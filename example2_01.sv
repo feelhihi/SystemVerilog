@@ -20,15 +20,15 @@ module my_scalar;
   time t;          //64-bit unsigned
   
   initial begin
-    b = 9;
-    b32 = 19;
-    $display("unsigned : %0d, %0d", b, b32); //1, 9
+    b = 7;
+    b32 = 17;
+    $display("unsigned : %0d, %0d", b, b32); //1, 17
     
-    b8 = -9;
-    r = -1.9;
-    $display("signed : %0d, %.2f", b8, r); //-9, -1.90
+    b8 = -7;
+    r = -1.7;
+    $display("signed : %0d, %.1f", b8, r); //-7, -1.7
     
-    i4 = 'bx;
+    i4 = 'bz;
     $display("XZ : %0d", i4); //x
     if ($isunknown(i4)==1) //X或Z會輸出1
       $display("i4 is unknown");
