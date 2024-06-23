@@ -1,7 +1,14 @@
 // Code your design here
 module my_task;
   
-/* 編譯失敗 , 無bus定義 */
+typedef struct { bit request, grant, enable;
+                logic [31:0] data;
+                logic [31:0] addr;
+                    }BUS;
+BUS bus = '{0,0,0,
+            32'h0000_0001,
+            32'h0000_0001
+           };
 /*
   task 可以消耗時間#100/wait/@...etc , function 不能
   子程序建議使用 function , 無論 task 或 function都可以調用
