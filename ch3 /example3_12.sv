@@ -22,9 +22,9 @@ initial begin
   
   bit [31:0] a[] = '{0,10,10,8,8}; //不能用定長數組
   print_checksum(a);               //pair XOR = 0
-  print_checksum(a,2);             //10 = [2:$] =>  0^10 = 10
-  print_checksum(a,,3);            // 8 = [$:3] => 10^8  = 2
-  print_checksum(a,2,3);           // 2 = [2:3] =>  2^2  = 0
+  print_checksum(a,2);             //10 = [2:$] =>  0^10 = 10,繼承上次的0
+  print_checksum(a,,3);            // 8 = [$:3] => 10^8  = 2,繼承上次的10
+  print_checksum(a,2,3);           // 2 = [2:3] =>  2^2  = 0,繼承上次的2
   
 end
 
