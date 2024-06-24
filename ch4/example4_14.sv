@@ -10,8 +10,8 @@ interface arb_if (input bit clk);
   
   // clk 控制
   clocking cb @(posedge clk); //定義為上沿 ,@(clk) 雙沿
-    output request;
-    input grant;
+    output request; //上沿以後取樣
+    input grant; //上沿以前取樣
   endclocking
   
   // modport 分群
