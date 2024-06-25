@@ -18,11 +18,13 @@ program test (master_if mif);
   initial begin
     mif.cb.data <= 'z;     //三態總線
     @mif.cb;               //wait
-    $displayh(mif.cb.data);//read: zz
+    $displayh("@%0t:data=%h",$time,mif.cb.data);//read: zz
     @mif.cb;               //
     mif.cb.data <= 7'h5a;  //write
+    $display("@%0t:write data",$time);//write
     @mif.cb;               //
-    $displayh(mif.cb.data);//read: 5a
+    //$displayh(mif.cb.data);//read: 5a
+    $displayh("@%0t:data=%h",$time,mif.cb.data);//read: 5a
     @mif.cb;               //
     mif.cb.data <= 'z;     //釋放總線
   end
