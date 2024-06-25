@@ -38,10 +38,12 @@ endmodule
 program automatic test (arb_if.TEST arbif);
   // ...
   initial begin
+    //Observe,Reactive
     arbif.rst <= 2'b01; //觸發 DUT reset
     arbif.cb.request <= 2'b01;
     $display("@%0t: Drove req=01",$time);
     repeat(2) @arbif.cb;
+    //Postponed
     if(arbif.cb.grant!=2'b01)
       //$display("@%0t: a1: grant!=2'b01",$time);
       $display("@%0t: a1: grant=%b",$time,arbif.cb.grant);
@@ -54,7 +56,9 @@ module top;
 
   always #5 clk = ~clk;
   arb_if arbif(clk);
+  //active(design)
   arb a1 (arbif);
+  //Observe,Reactive,Postponed
   test t1 (arbif);
   
   initial begin
