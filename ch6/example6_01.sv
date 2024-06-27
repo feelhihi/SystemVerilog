@@ -10,10 +10,10 @@ module my_random;
   class Packet;
     // 隨機變數
     rand bit[31:0] src,dst,data[8];
-    randc bit[7:0] kind;
+    rand bit[7:0] kind;
     // 約束, 至少要有一組隨機變數
-    constraint c {src > 10;
-                  src < 15;} //不能寫 10<src<15, 類似C++
+    constraint c{10<src;
+                src<100;} //不能寫 10<src<15, 類似C++
   endclass:Packet
   
   task transmit (Packet p); //object 作為引數
@@ -21,14 +21,15 @@ module my_random;
   endtask
 
   Packet p;
-  initial begin //沒有always clk, 只會產生一次
+  initial begin 
+    repeat(10) begin //產生10次
     p = new();
-    assert(p.randomize()) //沒有分號
-      $display("Pass");
+    assert(p.randomize())
     else begin
       $display("src Failed:%0d",p.src);
       $fatal(0,"Packet::randomsize failed"); //停止仿真
     end
     transmit(p);
+    end
   end
 endmodule;
