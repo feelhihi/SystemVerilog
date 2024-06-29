@@ -13,7 +13,7 @@ module my_class;
   LenDist lenD;
   int len;
   int treeCnt[string];
-  bit[3:0] one_write_wt=1,one_read_wt=2;
+  bit[3:0] one_write_wt=1,one_read_wt=1;
   bit[3:0] mem_write_wt=2,io_write_wt=2,cfg_write_wt=6;
   bit[3:0] mem_read_wt=6,io_read_wt=2,cfg_read_wt=2;
   initial begin
@@ -31,8 +31,8 @@ module my_class;
     $display("len=%0d",len);
     
     // ex6.67 決策樹
-    repeat(1000) begin
-      randcase
+    repeat(2000) begin
+      randcase//level 1
       one_write_wt: do_one_write();
       one_read_wt: do_one_read();
       //seq_write_wt: do_seq_write();
@@ -43,7 +43,7 @@ module my_class;
   end
   
   //決策樹
-  task do_one_write;
+  task do_one_write;//level 2
     randcase
     mem_write_wt: show_msg("do_mem_write()");
     io_write_wt: show_msg("do_io_write()");
@@ -51,7 +51,7 @@ module my_class;
     endcase
   endtask
   
-  task do_one_read;
+  task do_one_read;//level 2
     randcase
     mem_read_wt: show_msg("do_mem_read()");
     io_read_wt: show_msg("do_io_read()");
