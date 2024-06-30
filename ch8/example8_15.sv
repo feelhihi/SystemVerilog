@@ -4,7 +4,11 @@
   多型: 使用當前類別的func :
   (1)父類要有 virtual 才能去覆寫!!!
      若把virtual拔掉,最後一個是Transaction::calc_crc,因為沒有覆寫到
-  (2)覆寫的名稱跟引數必須相同 -> 8.3.3 Signatures(override)
+  (2)覆寫的名稱跟引數必須相同 -> 8.3.3 Signatures
+• 方法重載(Overload)：
+我們在方法那一節討論到，方法重載(Overload)，即在一個類別當中，有同樣的方法名稱，但參數資料不同。
+• 方法覆寫(Override))：
+子類別繼承父類別，覆寫父類別方法，方法名稱與參數都一樣。子類別可以根據自己需求重新定義改寫方法。
 */
 
 class Transaction;
