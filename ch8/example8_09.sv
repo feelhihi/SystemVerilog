@@ -39,14 +39,16 @@ endclass:Transaction
 
 class BadTr extends Transaction;
   rand bit bad_crc;
+  bit [31:0] corr_crc;
   
   virtual function void calc_crc;
     super.calc_crc();        // Compute good CRC
+    corr_crc = crc;
     if (bad_crc) crc = ~crc; // Corrupt the CRC bits
   endfunction
   
   virtual function void display(input string prefix="");
-    $write("%s BadTr: bad_crc:%b, " ,prefix,bad_crc);
+    $write("%s BadTr: bad_crc:%b,corr_crc=%h " ,prefix,bad_crc,corr_crc);
     super.display();
   endfunction
   //ex8.21
@@ -175,47 +177,47 @@ endmodule:top
 
 
 /*
-  [Gen]->@0
-  [Drv A]->@0
-  [Gen]->@0
-  [Drv B]->@5
-   BadTr: bad_crc:0,  Tr: src=a311a307, dst=4f5b1214, crc=4e53cb4d
-  [Drv A]->@5
-  [Gen]->@5
-  [Drv B]->@15
-   BadTr: bad_crc:1,  Tr: src=442b2b72, dst=875bded6, crc=d0b59f40
-  [Drv A]->@15
-  [Gen]->@15
-  [Drv B]->@25
-   BadTr: bad_crc:0,  Tr: src=31bf3efe, dst=55b5b7f8, crc=1570ba65
-  [Drv A]->@25
-  [Gen]->@25
-  [Drv B]->@35
-   BadTr: bad_crc:1,  Tr: src=04e50db9, dst=79efa74d, crc=7826d839
-  [Drv A]->@35
-  [Gen]->@35
-  [Drv B]->@45
-   BadTr: bad_crc:1,  Tr: src=501bf406, dst=6e0388be, crc=2380cb8d
-  [Drv A]->@45
-  [Gen]->@45
-  [Drv B]->@55
-   BadTr: bad_crc:0,  Tr: src=4c0260d4, dst=2634d941, crc=06f10203
-  [Drv A]->@55
-  [Gen]->@55
-  [Drv B]->@65
-   BadTr: bad_crc:0,  Tr: src=a5047a55, dst=749f27ba, crc=0292ac18
-  [Drv A]->@65
-  [Gen]->@65
-  [Drv B]->@75
-   BadTr: bad_crc:0,  Tr: src=15acd42f, dst=862e60e4, crc=34018692
-  [Drv A]->@75
-  [Gen]->@75
-  [Drv B]->@85
-   BadTr: bad_crc:1,  Tr: src=6fd33555, dst=752f65eb, crc=7fb77634
-  [Drv A]->@85
-  [Gen]->@85
-  [Drv B]->@95
-   BadTr: bad_crc:1,  Tr: src=71d73eab, dst=be4c747a, crc=ec821429
-  [Drv A]->@95
-  [Gen]->@95
+[Gen]->@0
+[Drv A]->@0
+[Gen]->@0
+[Drv B]->@5
+ BadTr: bad_crc:0,corr_crc=4e53cb4d  Tr: src=a311a307, dst=4f5b1214, crc=4e53cb4d
+[Drv A]->@5
+[Gen]->@5
+[Drv B]->@15
+ BadTr: bad_crc:1,corr_crc=2f4a60bf  Tr: src=442b2b72, dst=875bded6, crc=d0b59f40
+[Drv A]->@15
+[Gen]->@15
+[Drv B]->@25
+ BadTr: bad_crc:0,corr_crc=1570ba65  Tr: src=31bf3efe, dst=55b5b7f8, crc=1570ba65
+[Drv A]->@25
+[Gen]->@25
+[Drv B]->@35
+ BadTr: bad_crc:1,corr_crc=87d927c6  Tr: src=04e50db9, dst=79efa74d, crc=7826d839
+[Drv A]->@35
+[Gen]->@35
+[Drv B]->@45
+ BadTr: bad_crc:1,corr_crc=dc7f3472  Tr: src=501bf406, dst=6e0388be, crc=2380cb8d
+[Drv A]->@45
+[Gen]->@45
+[Drv B]->@55
+ BadTr: bad_crc:0,corr_crc=06f10203  Tr: src=4c0260d4, dst=2634d941, crc=06f10203
+[Drv A]->@55
+[Gen]->@55
+[Drv B]->@65
+ BadTr: bad_crc:0,corr_crc=0292ac18  Tr: src=a5047a55, dst=749f27ba, crc=0292ac18
+[Drv A]->@65
+[Gen]->@65
+[Drv B]->@75
+ BadTr: bad_crc:0,corr_crc=34018692  Tr: src=15acd42f, dst=862e60e4, crc=34018692
+[Drv A]->@75
+[Gen]->@75
+[Drv B]->@85
+ BadTr: bad_crc:1,corr_crc=804889cb  Tr: src=6fd33555, dst=752f65eb, crc=7fb77634
+[Drv A]->@85
+[Gen]->@85
+[Drv B]->@95
+ BadTr: bad_crc:1,corr_crc=137debd6  Tr: src=71d73eab, dst=be4c747a, crc=ec821429
+[Drv A]->@95
+[Gen]->@95
 */
