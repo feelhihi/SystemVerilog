@@ -4,7 +4,7 @@
   多型: 使用當前類別的func :
   (1)父類要有 virtual 才能去覆寫!!!
      若把virtual拔掉,最後一個是Transaction::calc_crc,因為沒有覆寫到
-  (2)覆寫的名稱跟引數必須相同 -> 8.3.3 Signatures
+  (2)覆寫的名稱跟引數必須相同 -> 8.3.3 Signatures(override)
 */
 
 class Transaction;
